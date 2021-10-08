@@ -11,5 +11,5 @@ contract CartaoDeVacinacao  {
         string public vacinador = "Roberto da Silva";
         bool  public  imunizado = false;
         address public  wallet = 0x43fB565603bac1802595c9E643c7710216E344B8;
-        string private constant fabricante = "Pfizer";
+        string private constant fabricante = "Pfizzer";
 }
