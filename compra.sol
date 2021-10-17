@@ -9,10 +9,10 @@ contract compraEVenda {
     string cartorio;
     string dataDeVencimento;
     bool quitado = false;
-    uint valorTotal;
-    uint valorDaParcela;
-    uint valorEntrada;
-    uint valorEmAberto;
+    uint public valorTotal = 100000;
+    uint public valorDaParcela;
+    uint public valorEntrada;
+    uint public valorEmAberto;
     uint quantidadeDeParcelas;
     uint porcentagemMulta;
     
