@@ -2,63 +2,42 @@ pragma solidity 0.8.9;
 
 contract airbnb {
     
+    address proprietario;
+    address inquilino;
+    uint    precoProp;       // preco por dia da propriedade (R$)
+    string  endProp;
+    bool    propDisponivel;
+    bool permFumar;
+    bool permCachorro;
     
-    struct  imoveis {
-        
-        string enderecoPropriedade;
-        uint numeroMaxHospedes;
-        uint precoHospedagem;
-        string descricaoProprieade;
-        string nomeProprietario;
-        
-    }
-    
-     address enderecoHospede;
-     uint dataCriacao;
-     imoveis[] public propriedades;
-     bool propriedadeDisponivel;
-    
-    constructor (
-      address _enderecoHospede
-    )
-    {
-      enderecoHospede = _enderecoHospede;
+    constructor (uint _precoProp) {
+        proprietario = msg.sender;
+        propDisponivel = true;
+        precoProp = _precoProp;
     }
     
     
-    function criarAnuncio (
-        string memory _enderecoPropriedade,
-        uint _numeroMaxHospedes, 
-        uint _precoHospedagem,
-        string memory _descricaoProprieade, 
-        string memory _nomeProprietario
-        )
-            public
-        {
-        propriedades.push(imoveis(_enderecoPropriedade, _numeroMaxHospedes, _precoHospedagem, _descricaoProprieade, _nomeProprietario));
-        }
     
-    function aumentoPercentualFeriado (uint _percentualAumento, uint _numProp)  public {
-        propriedades[_numProp].precoHospedagem += (propriedades[_numProp].precoHospedagem * _percentualAumento)/100;
-        }
+    function alugarPropriedade(uint _diasAluguel) public {
+        require (_diasAluguel > 0);
+        require (_diasAluguel < 21);
+        inquilino = msg.sender;
+        propDisponivel = false;
+    }
         
-    function anuncioCriado (uint _numPro) public view returns (string memory, string memory, string memory, string memory, string memory, uint, string memory, uint) {
-        return ("Parabens,  ",propriedades[_numPro].nomeProprietario, 
-            "seu anuncio foi criado com as seguintes informacoes.... Endereco da propriedade: ",
-            propriedades[_numPro].enderecoPropriedade,
-            "Numero maximo de hospedes: ",
-            propriedades[_numPro].numeroMaxHospedes,
-            "Preco da Hospedagem: ",
-            propriedades[_numPro].precoHospedagem
-            );
-        
-                
+    function modificarDisponibilidade () public {
+        require (msg.sender == proprietario);
+        if (propDisponivel == true) { propDisponivel = false;}
+        else {propDisponivel = false;}
+    }
         
         
     }
-        
-
-        
-}
-        
+    
+    
+    
+    
+    
+    
+    
     
